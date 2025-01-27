@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RepoPulse - Repository Health Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>RepoPulse - Repository Health Dashboard</h1>
+    <div class="dashboard" id="dashboard"></div>
+
+    <script>
+        async function fetchRepoHealth() {
+            const response = await fetch("/api/repo-health");
+            return await response.json();
+        }
+
+        function renderDashboard(data) {
+            const dashboard = document.getElementById("dashboard");
+            dashboard.innerHTML = "";
+
+            for (const [repo, metrics] of Object.entries(data)) {
+                const card = document.createElement("div");
+                card.className = "card";
+
+                const title = document.createElement("h2");
+                title.textContent = repo;
+                card.appendChild(title);
+
+                const issues = document.createElement("p");
+                issues.textContent = `Open Issues: ${metrics.open_issues}`;
+                card.appendChild(issues);
+
+                const prs = document.createElement("p");
+                prs.textContent = `Open PRs: ${metrics.open_prs}`;
+                card.appendChild(prs);
+
+                const lastCommit = document.createElement("p");
+                lastCommit.textContent = `Last Commit: ${metrics.last_commit}`;
+                card.appendChild(lastCommit);
+
+                dashboard.appendChild(card);
+            }
+        }
+
+        async function init() {
+            const data = await fetchRepoHealth();
+            renderDashboard(data);
+        }
+
+        init();
+    </script>
+</body>
+</html>
