@@ -14,13 +14,6 @@ RepoPulse is a web-based dashboard designed to monitor the health of your GitHub
 
 ---
 
-## Screenshots
-
-![RepoPulse Dashboard](dashboard.png)  
-*Example of the RepoPulse dashboard displaying repository health metrics.*
-
----
-
 ## Getting Started
 
 ### Prerequisites
