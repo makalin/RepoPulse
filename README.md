@@ -26,7 +26,7 @@ RepoPulse is a web-based dashboard designed to monitor the health of your GitHub
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/RepoPulse.git
+   git clone https://github.com/makalin/RepoPulse.git
    cd RepoPulse
    ```
 
